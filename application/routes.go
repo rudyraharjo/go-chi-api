@@ -7,6 +7,7 @@ import (
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/cors"
 	"github.com/jackc/pgx/v5/pgxpool"
+	"github.com/rudyraharjo/api-rud/apps/user"
 )
 
 func (a *App) Routes(db *pgxpool.Pool) http.Handler {
@@ -23,14 +24,12 @@ func (a *App) Routes(db *pgxpool.Pool) http.Handler {
 		MaxAge:           300,
 	}))
 
-	// all v1 routes
+	userHandler := &user.User{
+		RepoUser: *user.NewUserRepository(db),
+	}
+
 	router.Route("/api/v1/", func(router chi.Router) {
-		router.Get("/auth/login", func(w http.ResponseWriter, r *http.Request) {
-			w.Write([]byte("auth/login!"))
-		})
-		router.Get("/auth/signup", func(w http.ResponseWriter, r *http.Request) {
-			w.Write([]byte("auth/signup!"))
-		})
+		router.Get("/users/{id}", userHandler.GetUserByID)
 	})
 
 	return router

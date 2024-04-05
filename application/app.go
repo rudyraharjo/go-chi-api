@@ -21,13 +21,12 @@ func NewApp(config Config, db *pgxpool.Pool) (*App, error) {
 		config: config,
 	}
 
-	// app.Routes(db)
-
 	return app, nil
 }
 
 func (app *App) Serve(ctx context.Context) error {
 	port := app.config.App.Port
+
 	log.Println("API listening on port", port)
 
 	server := &http.Server{

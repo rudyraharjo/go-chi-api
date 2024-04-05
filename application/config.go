@@ -12,9 +12,10 @@ type Config struct {
 }
 
 type AppConfig struct {
-	Name       string           `yaml:"name"`
-	Port       string           `yaml:"port"`
-	Encryption EncryptionConfig `yaml:"encryption"`
+	Name        string           `yaml:"name"`
+	Port        string           `yaml:"port"`
+	Encryption  EncryptionConfig `yaml:"encryption"`
+	IdleTimeout uint8            `yaml:"http_server_idle_timeout"`
 }
 
 type EncryptionConfig struct {

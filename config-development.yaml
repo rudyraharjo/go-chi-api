@@ -1,6 +1,7 @@
 app:
   name: api-rud
   port: "4000"
+  http_server_idle_timeout: 60 #second
   encryption:
     salt: 10
     jwt_secret: Rahasia*1!
